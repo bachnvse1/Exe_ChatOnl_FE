@@ -42,6 +42,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import config from "../config";
 import Footer from "./footer";
+import logo from "../images/LogoGPT.webp";
 
 const Shop1 = () => {
   const [products, setProducts] = useState([]);
@@ -280,11 +281,19 @@ const Shop1 = () => {
 
   return (
     <div>
-      <AppBar position="static" sx={{ bgcolor: "orange" }}>
+      <AppBar position="static" sx={{ bgcolor: "#8B5A2B" }}>
         <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Gom Xinh Potter
-          </Typography>
+          <Box sx={{ flexGrow: 1 }}>
+            <img
+              src={logo}
+              alt="Gom Xinh Potter"
+              style={{
+                height: "50px", // Điều chỉnh kích thước
+                borderRadius: "10px", // Bo góc 10px (có thể tăng hoặc giảm)
+                objectFit: "cover", // Đảm bảo ảnh không bị méo
+              }}
+            />
+          </Box>
           <TextField
             variant="outlined"
             placeholder="Tìm kiếm sản phẩm..."
