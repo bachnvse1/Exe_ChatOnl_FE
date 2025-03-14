@@ -39,14 +39,14 @@ const Footer = () => {
       <Box
         sx={{
           width: "100vw", // Đảm bảo full màn hình
-          bgcolor: "#F5E1C0",
+          bgcolor: "#8B5A2B",
           py: 2,
           textAlign: "center",
           color: "#5D4037",
           fontWeight: "bold",
         }}
       >
-        <Typography variant="body2">
+        <Typography variant="body2" style={{ color: "white" }}>
           © 2025 Gom Xinh Potter - All rights reserved
         </Typography>
       </Box>
