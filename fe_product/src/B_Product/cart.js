@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import config from "../config";
 import "../css1/cart.css";
-
+import { useNavigate } from "react-router-dom";
 const Cart = () => {
+  const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
   const [cartItems, setCartItems] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
@@ -126,7 +127,12 @@ const Cart = () => {
             <p>Phí Ship: 0</p>
             <p>Thuế VAT : 0</p>
             <h4>Tổng tiền: {subtotal.toLocaleString()} VNĐ</h4>
-            <button className="checkout-button">Thanh toán</button>
+            <button
+              className="checkout-button"
+              onClick={() => navigate("/checkout")}
+            >
+              Thanh toán
+            </button>
             <button className="continue-shopping">Tiếp tục mua sắm</button>
           </div>
         </div>

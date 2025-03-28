@@ -27,7 +27,7 @@ const Login = () => {
           password,
         },
         {
-          withCredentials: true, // 👈 Thêm cái này nếu backend cần cookie/token
+          withCredentials: true,
           headers: {
             "Content-Type": "application/json",
           },

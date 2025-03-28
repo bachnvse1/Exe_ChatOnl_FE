@@ -42,6 +42,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import config from "../config";
 import Footer from "./footer";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import logo from "../images/LogoGPT.webp";
 
 const Shop1 = () => {
@@ -199,7 +201,9 @@ const Shop1 = () => {
         body: JSON.stringify(1),
       });
       if (!response.ok) throw new Error("Thêm vào giỏ hàng thất bại");
-      alert("Thêm vào giỏ hàng thành công!");
+      toast.success(`Thêm vào giỏ hàng thành công`, {
+        position: "top-left",
+      });
       closeModal();
     } catch (error) {
       console.error("Lỗi:", error);
@@ -460,9 +464,6 @@ const Shop1 = () => {
                       >
                         Xem chi tiết
                       </Button>
-                      <IconButton>
-                        <Favorite />
-                      </IconButton>
                     </CardActions>
                   </Card>
                 </motion.div>
