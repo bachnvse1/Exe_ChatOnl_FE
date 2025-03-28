@@ -11,6 +11,7 @@ import OTP from "./Authen/otp";
 import ProfilePage from "./Account/profile";
 import Cart from "./B_Product/cart";
 import Dashboard from "./Admin/adminDashboard";
+import CheckoutPage from "./B_Product/CheckoutPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
     </Router>
   );
