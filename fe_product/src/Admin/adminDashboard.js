@@ -7,11 +7,13 @@ import {
   Typography,
   Paper,
   Toolbar,
+  Button,
 } from "@mui/material";
 import { People, Inventory, ShoppingCart } from "@mui/icons-material";
 import Users from "./Users";
 import Products from "./Product";
 import Orders from "./Order";
+import OrderDetail from "./OrderDetail";
 import Footer from "../A_Home/footer";
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -25,12 +27,16 @@ const TabPanel = (props) => {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p: 4 }}>
           <Typography>{children}</Typography>
         </Box>
       )}
     </div>
   );
+};
+const handleLogout = () => {
+  sessionStorage.removeItem("token");
+  window.location.href = "/";
 };
 
 const AdminPage = () => {
@@ -46,6 +52,10 @@ const AdminPage = () => {
       <AppBar position="static" sx={{ backgroundColor: "orange" }}>
         <Toolbar>
           <Typography variant="h6">Trang chủ quản lí</Typography>
+          <Box sx={{ flexGrow: 1 }} />
+          <Button color="inherit" onClick={handleLogout}>
+            Đăng xuất
+          </Button>
         </Toolbar>
       </AppBar>
 
@@ -55,6 +65,7 @@ const AdminPage = () => {
           <Tab icon={<People />} label="Danh sách người dùng" />
           <Tab icon={<Inventory />} label="Danh sách sản phẩm" />
           <Tab icon={<ShoppingCart />} label="Danh sách đơn hàng đã bán" />
+          <Tab icon={<Inventory />} label="Chi tiết đơn hàng" />
         </Tabs>
 
         {/* Tab Panels */}
@@ -66,6 +77,9 @@ const AdminPage = () => {
         </TabPanel>
         <TabPanel value={value} index={2}>
           <Orders />
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          <OrderDetail />
         </TabPanel>
       </Paper>
       <Footer />
