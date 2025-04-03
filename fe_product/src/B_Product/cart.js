@@ -133,7 +133,12 @@ const Cart = () => {
             >
               Thanh toán
             </button>
-            <button className="continue-shopping">Tiếp tục mua sắm</button>
+            <button
+              className="continue-shopping"
+              onClick={() => navigate("/shop1")}
+            >
+              Tiếp tục mua sắm
+            </button>
           </div>
         </div>
       </div>

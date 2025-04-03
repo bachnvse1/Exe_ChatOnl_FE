@@ -4,8 +4,8 @@ import { Box, Alert } from "@mui/material";
 import axios from "axios";
 import config from "../config";
 
-const Orders = () => {
-  const [orders, setOrders] = useState([]);
+const OrderDetails = () => {
+  const [orderDetails, setOrderDetails] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [paginationModel, setPaginationModel] = useState({
@@ -14,20 +14,26 @@ const Orders = () => {
   });
 
   useEffect(() => {
-    const fetchOrders = async () => {
+    const fetchOrderDetails = async () => {
       try {
         const token = sessionStorage.getItem("token");
-        const response = await axios.get(`${config.API_BASE_URL}/Orders`, {
-          headers: {
-            "ngrok-skip-browser-warning": "true",
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await axios.get(
+          `${config.API_BASE_URL}/OrderDetails`,
+          {
+            headers: {
+              "ngrok-skip-browser-warning": "true",
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
         if (response.status === 200) {
-          setOrders(response.data);
+          // Lọc bỏ OrderDetail bị xóa mềm (IsDeleted = true)
+          const filteredData = response.data.filter((item) => !item.isDeleted);
+          setOrderDetails(filteredData);
         } else {
-          throw new Error("Lỗi khi tải đơn hàng");
+          throw new Error("Lỗi khi tải chi tiết đơn hàng");
         }
       } catch (err) {
         setError(err.message);
@@ -36,31 +42,19 @@ const Orders = () => {
       }
     };
 
-    fetchOrders();
+    fetchOrderDetails();
   }, []);
 
   const columns = [
-    { field: "id", headerName: "Mã đơn", flex: 1 },
-    { field: "customerName", headerName: "Khách hàng", flex: 1 },
+    { field: "id", headerName: "Mã chi tiết", flex: 1 },
+    { field: "orderId", headerName: "Mã đơn hàng", flex: 1 },
+    { field: "productName", headerName: "tên sản phẩm", flex: 1 },
+    { field: "quantity", headerName: "Số lượng", flex: 1 },
     {
-      field: "totalPrice",
-      headerName: "Tổng tiền (VND)",
+      field: "price",
+      headerName: "Giá (VND)",
       flex: 1,
       renderCell: (params) => params.value.toLocaleString("vi-VN"),
-    },
-    { field: "status", headerName: "Trạng thái", flex: 1 },
-    {
-      field: "createdAt",
-      headerName: "Ngày tạo",
-      flex: 1,
-      renderCell: (params) => new Date(params.value).toLocaleString(),
-    },
-    {
-      field: "updatedAt",
-      headerName: "Cập nhật",
-      flex: 1,
-      renderCell: (params) =>
-        params.value ? new Date(params.value).toLocaleString() : "N/A",
     },
   ];
 
@@ -70,7 +64,7 @@ const Orders = () => {
   return (
     <Box sx={{ height: 600, width: "100%" }}>
       <DataGrid
-        rows={orders}
+        rows={orderDetails}
         columns={columns}
         pagination
         paginationModel={paginationModel}
@@ -85,4 +79,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default OrderDetails;

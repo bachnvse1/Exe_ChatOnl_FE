@@ -211,6 +211,15 @@ const Login = () => {
             {isRegistering ? "Đăng nhập" : "Đăng kí"}
           </span>
         </p>
+
+        <p>
+          <span
+            style={{ color: "red", cursor: "pointer" }}
+            onClick={() => navigate("/forgot-password")}
+          >
+            Quên mật khẩu?
+          </span>
+        </p>
       </div>
     </div>
   );

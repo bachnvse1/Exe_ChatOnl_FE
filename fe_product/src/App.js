@@ -12,7 +12,9 @@ import ProfilePage from "./Account/profile";
 import Cart from "./B_Product/cart";
 import Dashboard from "./Admin/adminDashboard";
 import CheckoutPage from "./B_Product/CheckoutPage";
-
+import Orders from "./Admin/Order";
+import OrderDetails from "./Admin/OrderDetail";
+import ForgotPassword from "./Authen/ForgotPassword";
 function App() {
   return (
     <Router>
@@ -28,6 +30,9 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/order" element={<Orders />} />
+        <Route path="/orderDetail" element={<OrderDetails />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
       </Routes>
     </Router>
   );

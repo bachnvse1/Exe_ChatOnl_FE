@@ -155,15 +155,39 @@ const ProfilePage = () => {
     const handleClickHome = () => {
       window.location.href = "/shop1";
     };
+
+    const handleClickOrder = () => {
+      window.location.href = "/order";
+    };
+    const handleClickOrderDetails = () => {
+      window.location.href = "/orderDetail";
+    };
+
     return (
-      <button
-        className={`px-4 py-2 bg-blue-500 text-black rounded-lg hover:bg-blue-600 transition-all  duration-300 ease-in-out shadow-md  hover:shadow-lg  active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400${className}
-        `}
-        onClick={handleClickHome}
-        style={{ marginBottom: "10px" }}
-      >
-        Home
-      </button>
+      <div>
+        <button
+          className={`px-4 py-2 bg-blue-500 text-black rounded-lg hover:bg-blue-600 transition-all duration-300 ease-in-out shadow-md hover:shadow-lg active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400 ${className}`}
+          onClick={handleClickHome}
+          style={{ marginBottom: "10px", marginRight: "10px" }}
+        >
+          Home
+        </button>
+
+        <button
+          className={`px-4 py-2 bg-green-500 text-black rounded-lg hover:bg-green-600 transition-all duration-300 ease-in-out shadow-md hover:shadow-lg active:scale-95 focus:outline-none focus:ring-2 focus:ring-green-400 ${className}`}
+          onClick={handleClickOrder}
+          style={{ marginBottom: "10px", marginRight: "10px" }}
+        >
+          Order
+        </button>
+        <button
+          className={`px-4 py-2 bg-green-500 text-black rounded-lg hover:bg-green-600 transition-all duration-300 ease-in-out shadow-md hover:shadow-lg active:scale-95 focus:outline-none focus:ring-2 focus:ring-green-400 ${className}`}
+          onClick={handleClickOrderDetails}
+          style={{ marginBottom: "10px" }}
+        >
+          Order Details
+        </button>
+      </div>
     );
   };
 
