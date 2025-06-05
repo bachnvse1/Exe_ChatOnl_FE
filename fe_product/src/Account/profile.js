@@ -11,6 +11,9 @@ const ProfilePage = () => {
   const [dataResponse, setDataResponse] = useState("");
   const usernameRequest = sessionStorage.getItem("username");
   const token = sessionStorage.getItem("token");
+  const imgUrl =
+    sessionStorage.getItem("imgUrl") ||
+    "https://bootdey.com/img/Content/avatar/avatar6.png";
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -202,7 +205,7 @@ const ProfilePage = () => {
               <div className="card-body">
                 <div className="d-flex flex-column align-items-center text-center">
                   <img
-                    src="https://bootdey.com/img/Content/avatar/avatar6.png"
+                    src={imgUrl}
                     alt="Admin"
                     className="rounded-circle p-1 bg-primary"
                     width="110"

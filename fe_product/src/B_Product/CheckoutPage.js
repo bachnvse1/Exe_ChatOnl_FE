@@ -194,9 +194,11 @@ const CheckoutPage = () => {
             startIcon={<CheckCircleIcon />}
             component={motion.div}
             whileHover={{ scale: 1.05 }}
+            disabled={subtotal === 0}
           >
             Đặt hàng & In hóa đơn
           </Button>
+
           <Button
             variant="contained"
             color="secondary"
