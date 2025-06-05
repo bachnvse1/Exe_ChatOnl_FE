@@ -81,6 +81,10 @@ const Shop1 = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
+      if (!token) {
+        console.error("Token không hợp lệ hoặc chưa có.");
+        return;
+      }
       try {
         const apiUrl = `${config.API_BASE_URL}/Products`;
         const response = await fetch(apiUrl, {

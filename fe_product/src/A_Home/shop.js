@@ -16,7 +16,7 @@ const Shop = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(8); // Số sản phẩm hiển thị trên mỗi trang
+  const [productsPerPage] = useState(8);
   const [selectedCategory, setSelectedCategory] = useState("");
 
   // Lấy sản phẩm hiển thị trên trang hiện tại

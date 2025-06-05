@@ -43,10 +43,11 @@ const Home = () => {
   // State để lưu danh sách sản phẩm
   const [products, setProducts] = useState([]);
   const token = sessionStorage.getItem("token");
+  console.log("token ++" + token);
   useEffect(() => {
     fetch(`${config.API_BASE_URL}/Products`, {
       headers: {
-        "ngrok-skip-browser-warning": "true", // Bỏ qua cảnh báo ngrok
+        "ngrok-skip-browser-warning": "true",
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },

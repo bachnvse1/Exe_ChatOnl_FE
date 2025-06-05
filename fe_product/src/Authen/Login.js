@@ -37,7 +37,6 @@ const Login = () => {
       if (response.data?.success) {
         const userInfo = response.data;
 
-        // Lưu vào sessionStorage
         sessionStorage.setItem("token", userInfo.token);
         sessionStorage.setItem("username", userInfo.username);
         sessionStorage.setItem("isAdmin", userInfo.isAdmin ? "true" : "false");

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import Login from "./Authen/Login";
+import Login from "./Authen/LoginGoogle";
 import Home from "./A_Home/home";
 import Shop from "./A_Home/shop";
 import Shop1 from "./A_Home/Shop1";
@@ -15,6 +15,8 @@ import CheckoutPage from "./B_Product/CheckoutPage";
 import Orders from "./Admin/Order";
 import OrderDetails from "./Admin/OrderDetail";
 import ForgotPassword from "./Authen/ForgotPassword";
+import AuthCallback from "./Authen/AuthCallback";
+import HomePage from "./A_Home/HomePage";
 function App() {
   return (
     <Router>
@@ -33,6 +35,8 @@ function App() {
         <Route path="/order" element={<Orders />} />
         <Route path="/orderDetail" element={<OrderDetails />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/auth/callback" element={<AuthCallback />} />
+        <Route path="/HomePage" element={<HomePage />} />
       </Routes>
     </Router>
   );
