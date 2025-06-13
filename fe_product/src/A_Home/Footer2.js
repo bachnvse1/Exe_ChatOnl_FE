@@ -5,83 +5,124 @@ export default function Footer2() {
         background: "#6187ab",
         color: "#fff",
         textAlign: "center",
-        padding: "54px 0 56px 0",
+        padding: "44px 0 20px 0",
         fontFamily: "Montserrat, Arial, sans-serif",
       }}
     >
-      <div style={{ fontSize: "2.1rem", letterSpacing: 3, fontWeight: 400 }}>
-        SECURE CITY SOLUTIONS
-      </div>
+      {/* Tên tổ chức */}
       <div
         style={{
-          margin: "20px 0 38px 0",
-          letterSpacing: 4,
+          fontSize: "2.1rem",
+          letterSpacing: 2,
+          fontWeight: 500,
+          textTransform: "uppercase",
+        }}
+      >
+        Trung tâm nghiên cứu, ứng dụng khoa học kỹ thuật và chuyển giao công
+        nghệ - T07, Bộ Công An
+      </div>
+
+      {/* Slogan hoặc mô tả */}
+      <div
+        style={{
+          margin: "18px 0 32px 0",
+          letterSpacing: 2,
           fontSize: "1.08rem",
           fontWeight: 500,
           color: "#f4f8fd",
         }}
       >
-        Augmenting Networks Everywhere
+        Thông tin liên hệ
       </div>
+
+      {/* Thông tin liên hệ */}
       <div
         style={{
           display: "flex",
           justifyContent: "center",
-          gap: 64,
-          maxWidth: 800,
-          margin: "0 auto",
+          gap: 56,
+          maxWidth: 880,
+          margin: "0 auto 24px auto",
+          flexWrap: "wrap",
         }}
       >
-        {/* Cột Email */}
+        {/* Địa chỉ */}
         <div
           style={{
             borderRight: "1px solid #bdd0e2",
             paddingRight: 40,
-            minWidth: 240,
+            minWidth: 260,
+            textAlign: "left",
+            fontSize: "1.07rem",
+            letterSpacing: 0.4,
+            fontWeight: 400,
+            marginBottom: 12,
           }}
         >
-          <a
-            href="mailto:info@securecitysolutions.com"
-            style={{
-              color: "#fff",
-              textDecoration: "none",
-              fontSize: "1.05rem",
-              letterSpacing: 1,
-              fontWeight: 400,
-            }}
-          >
-            info@securecitysolutions.com
-          </a>
+          <div>
+            <span style={{ fontWeight: 500 }}>Trụ sở:</span>
+            <br />
+            Phường Hồ, Thị xã Thuận Thành,
+            <br />
+            Tỉnh Bắc Ninh
+          </div>
         </div>
-        {/* Cột Địa chỉ */}
+        {/* Email và hotline */}
         <div
           style={{
             paddingLeft: 40,
             textAlign: "left",
-            minWidth: 260,
-            fontSize: "1.08rem",
+            minWidth: 220,
+            fontSize: "1.07rem",
             letterSpacing: 0.4,
+            fontWeight: 400,
           }}
         >
-          135 Michael Cowpland Drive
-          <br />
-          Suite 240
-          <br />
-          Kanata, ON, Canada
-          <br />
-          K2M 2E9
-          <br />
-          <a
-            href="#"
-            style={{
-              color: "#fff",
-              textDecoration: "underline",
-              fontSize: "1rem",
-            }}
-          >
-            Privacy Policy
-          </a>
+          <div>
+            <span style={{ fontWeight: 500 }}>Email:</span>{" "}
+            <a
+              href="mailto:cgcn.t2@gmail.com"
+              style={{
+                color: "#fff",
+                textDecoration: "underline",
+                fontWeight: 400,
+              }}
+            >
+              cgcn.t2@gmail.com
+            </a>
+          </div>
+          <div style={{ marginTop: 10 }}>
+            <span style={{ fontWeight: 500 }}>Hotline:</span> 082.979.2222
+          </div>
         </div>
+      </div>
+
+      {/* Chính sách và bản quyền */}
+      <div
+        style={{
+          marginTop: 24,
+          fontSize: "0.99rem",
+          color: "#e0e8f5",
+          letterSpacing: 1,
+        }}
+      >
+        <a
+          href="#"
+          style={{
+            color: "#fff",
+            textDecoration: "underline",
+            marginRight: 16,
+            fontWeight: 400,
+          }}
+        >
+          Chính sách bảo mật
+        </a>
+        |
+        <span style={{ marginLeft: 16 }}>
+          &copy; {new Date().getFullYear()} Trung tâm nghiên cứu, ứng dụng khoa
+          học kỹ thuật và chuyển giao công nghệ - T07, Bộ Công An. All rights
+          reserved.
+        </span>
       </div>
     </footer>
   );

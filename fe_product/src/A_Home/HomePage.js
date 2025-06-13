@@ -9,9 +9,9 @@ export default function HomePage() {
     <>
       <Header />
       <HeroSection />
-      <AboutSection />
       <TestimonialCarousel />
       <FlagshipProducts />
+
       <Footer2 />
     </>
   );

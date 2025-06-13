@@ -1,143 +1,196 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-const testimonials = [
-  {
-    flag: "https://securecitysolutions.com/img/flagUK.svg",
-    quote:
-      "The Secure City Solutions technology is well embedded in the Canadian EDGE Innovation Centres with the ability to solve complex problems for our public safety first responders.",
-    author: "— EDGE Innovation Business Manager",
-  },
-  {
-    flag: "https://securecitysolutions.com/img/flagCanada.png",
-    quote:
-      "Secure City Solutions products take a truly unique approach to secure communications. They are proven reliable and with such a small form factor while offered at a relatively low cost.",
-    author: "— Retired Executive manager from United Kingdom",
-  },
-  {
-    flag: "https://securecitysolutions.com/img/flagCanada.png",
-    quote:
-      "Secure City Solutions brings innovation and reliability to our operations, allowing us to scale efficiently and securely.",
-    author: "— Technology Lead from United States",
-  },
-];
+import img1 from "./anh1.jpg";
+import img2 from "./anh2.jpg";
+import img3 from "./anh3.jpg";
+import img4 from "./anh4.jpg";
 
-const TestimonialCarousel = () => {
+const images = [img1, img2, img3, img4];
+const INTERVAL = 3000; // 3s
+const SLIDE_DURATION = 600; // ms
+
+const ImageGallery = () => {
   const [current, setCurrent] = useState(0);
+  const [next, setNext] = useState(null); // Số thứ tự ảnh sắp xuất hiện
+  const [animating, setAnimating] = useState(false);
+  const [direction, setDirection] = useState(1); // 1: sang phải, -1: sang trái
+  const timerRef = useRef();
 
-  const next = () => setCurrent((prev) => (prev + 1) % testimonials.length);
-  const prev = () =>
-    setCurrent(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
-    );
+  // Tự động chuyển ảnh
+  useEffect(() => {
+    timerRef.current = setTimeout(() => {
+      slideTo((current + 1) % images.length, 1);
+    }, INTERVAL);
+    return () => clearTimeout(timerRef.current);
+    // eslint-disable-next-line
+  }, [current]);
+
+  // Hàm chuyển sang ảnh tiếp theo
+  const slideTo = (idx, dir = 1) => {
+    if (animating || idx === current) return;
+    setNext(idx);
+    setDirection(dir);
+    setAnimating(true);
+    setTimeout(() => {
+      setCurrent(idx);
+      setAnimating(false);
+      setNext(null);
+    }, SLIDE_DURATION);
+  };
+
+  // Khi click dot
+  const handleDot = (idx) => {
+    if (idx === current) return;
+    const dir =
+      idx > current || (current === images.length - 1 && idx === 0) ? 1 : -1;
+    clearTimeout(timerRef.current);
+    slideTo(idx, dir);
+  };
 
   return (
-    <div style={{ textAlign: "center", padding: "36px 0 0" }}>
-      <h3
-        style={{ fontWeight: 400, fontSize: "1.35rem", marginBottom: "18px" }}
+    <div
+      style={{
+        background: "#f7fafc",
+        padding: "44px 0 36px 0",
+        width: "100%",
+        minHeight: 400,
+      }}
+    >
+      <div
+        style={{
+          textAlign: "center",
+          fontWeight: 600,
+          fontSize: "2rem",
+          marginBottom: 44,
+          letterSpacing: 1,
+          color: "#23426a",
+          textTransform: "uppercase",
+        }}
       >
-        Hear what our clients have to say
-      </h3>
-      <div style={{ minHeight: 180 }}>
-        <img
-          src={testimonials[current].flag}
-          alt="Flag"
-          style={{ width: 56, height: "auto", marginBottom: 12 }}
-        />
-        <blockquote
+        Lễ ký kết hợp tác giữa Trung tâm T2 và công ty Mismart
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          position: "relative",
+          height: 520,
+          alignItems: "center",
+        }}
+      >
+        <div
           style={{
-            fontSize: "1.08rem",
-            color: "#444",
-            maxWidth: 480,
-            margin: "0 auto",
-            marginBottom: 10,
-            lineHeight: "1.6",
-            fontStyle: "normal",
-            minHeight: 65,
+            width: 550,
+            height: 550,
+            position: "relative",
+            overflow: "hidden",
+            border: "8px solid #fff",
+            background: "#e9ecef",
+            boxShadow: "0 8px 32px 0 rgba(68, 87, 116, 0.18)",
           }}
         >
-          <span
-            style={{ fontSize: 22, verticalAlign: "middle", color: "#aaa" }}
-          >
-            “
-          </span>
-          {testimonials[current].quote}
-          <span
-            style={{ fontSize: 22, verticalAlign: "middle", color: "#aaa" }}
-          >
-            ”
-          </span>
-          <footer
+          {/* Ảnh hiện tại */}
+          <img
+            src={images[current]}
+            alt={`Slide ${current + 1}`}
             style={{
-              marginTop: 12,
-              color: "#888",
-              fontStyle: "italic",
-              fontSize: "0.97rem",
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              zIndex: 2,
+              transform:
+                animating && direction === 1
+                  ? "translateX(-100%)"
+                  : animating && direction === -1
+                  ? "translateX(100%)"
+                  : "translateX(0)",
+              opacity: animating ? 0.7 : 1,
+              transition: animating
+                ? `transform ${SLIDE_DURATION}ms cubic-bezier(.65,.05,.36,1), opacity ${SLIDE_DURATION}ms`
+                : "none",
+              boxShadow: animating
+                ? "0 6px 40px 0 rgba(33,50,88,0.13)"
+                : "0 8px 32px 0 rgba(68,87,116,0.18)",
             }}
-          >
-            {testimonials[current].author}
-          </footer>
-        </blockquote>
+            onMouseOver={(e) =>
+              (e.currentTarget.style.transform += " scale(1.04)")
+            }
+            onMouseOut={(e) =>
+              (e.currentTarget.style.transform =
+                e.currentTarget.style.transform.replace(" scale(1.04)", ""))
+            }
+          />
+          {/* Ảnh kế tiếp (slide vào) */}
+          {animating && next !== null && (
+            <img
+              src={images[next]}
+              alt={`Slide ${next + 1}`}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                display: "block",
+                position: "absolute",
+                top: 0,
+                left: 0,
+                zIndex: 3,
+                transform:
+                  direction === 1 ? "translateX(100%)" : "translateX(-100%)",
+                opacity: 1,
+                animation: `slide-in-${
+                  direction === 1 ? "right" : "left"
+                } ${SLIDE_DURATION}ms cubic-bezier(.65,.05,.36,1) forwards`,
+                boxShadow: "0 6px 40px 0 rgba(33,50,88,0.13)",
+              }}
+            />
+          )}
+          {/* Keyframes động inline */}
+          <style>
+            {`
+            @keyframes slide-in-right {
+              0% { transform: translateX(100%); }
+              100% { transform: translateX(0); }
+            }
+            @keyframes slide-in-left {
+              0% { transform: translateX(-100%); }
+              100% { transform: translateX(0); }
+            }
+            `}
+          </style>
+        </div>
       </div>
-
       {/* Dot navigation */}
       <div
         style={{
-          margin: "10px 0 0",
+          marginTop: 32,
           display: "flex",
           justifyContent: "center",
-          gap: 10,
+          gap: 16,
         }}
       >
-        {testimonials.map((_, idx) => (
+        {images.map((_, idx) => (
           <span
             key={idx}
-            onClick={() => setCurrent(idx)}
+            onClick={() => handleDot(idx)}
             style={{
               display: "inline-block",
-              width: 12,
-              height: 12,
+              width: 18,
+              height: 18,
               borderRadius: "50%",
-              background: current === idx ? "#222" : "#ccc",
+              background: current === idx ? "#23426a" : "#bcc7d4",
               cursor: "pointer",
-              margin: "0 2px",
+              border: current === idx ? "3px solid #6187ab" : "2px solid #fff",
+              transition: "background 0.3s,border 0.3s",
             }}
           />
         ))}
-      </div>
-
-      {/* Optional: Prev/Next buttons, hidden on mobile if desired */}
-      <div style={{ marginTop: 14 }}>
-        <button
-          onClick={prev}
-          style={{
-            background: "none",
-            border: "none",
-            color: "#4660a0",
-            fontSize: 24,
-            marginRight: 10,
-            cursor: "pointer",
-          }}
-          aria-label="Previous"
-        >
-          ‹
-        </button>
-        <button
-          onClick={next}
-          style={{
-            background: "none",
-            border: "none",
-            color: "#4660a0",
-            fontSize: 24,
-            marginLeft: 10,
-            cursor: "pointer",
-          }}
-          aria-label="Next"
-        >
-          ›
-        </button>
       </div>
     </div>
   );
 };
 
-export default TestimonialCarousel;
+export default ImageGallery;
